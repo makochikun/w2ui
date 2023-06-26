@@ -1,4 +1,4 @@
-/* w2ui 2.0.x (nightly) (6/26/2023, 4:59:39 PM) (c) http://w2ui.com, vitmalina@gmail.com */
+/* w2ui 2.0.x (nightly) (6/26/2023, 9:32:23 PM) (c) http://w2ui.com, vitmalina@gmail.com */
 /**
  * Part of w2ui 2.0 library
  *  - Dependencies: w2utils
@@ -19918,16 +19918,13 @@ class w2form extends w2base {
             buttons += '\n</div>'
         }
         html = ''
-        console.log( this.fields )
         let columnStyles = []
-        for ( let fld of this.fields ) {
-            if (fld.html?.page && fld.html?.column && fld.html?.columnStyle) {
-                if (columnStyles[fld.html.page] == null ) columnStyles[fld.html.page] = []
-                //if (columnStyles[fld.html.page][fld.html.column] == null ) columnStyles[fld.html.page][fld.html.column] = ''
+        for (let fld of this.fields) {
+            if ('page' in fld.html && 'column' in fld.html && 'columnStyle' in fld.html) {
+                if (!(fld.html.page in columnStyles)) columnStyles[fld.html.page] = []
                 columnStyles[fld.html.page][fld.html.column] = fld.html.columnStyle
             }
         }
-        console.log( columnStyles )
         for (let p = 0; p < pages.length; p++){
             html += '<div class="w2ui-page page-'+ p +'" style="' + (p !== 0 ? 'display: none;' : '') + this.pageStyle + '">'
             if (!pages[p]) {
@@ -19940,7 +19937,7 @@ class w2form extends w2base {
             html += '<div class="w2ui-column-container">'
             Object.keys(pages[p]).sort().forEach((c, ind) => {
                 if (c == parseInt(c)) {
-                    html += '<div class="w2ui-column col-'+ c +'">' + (pages[p][c] || '') + '\n</div>'
+                    html += '<div class="w2ui-column col-'+ c +'" style="' + (columnStyles[p][c] || '') + '">' + (pages[p][c] || '') + '\n</div>'
                 }
             })
             html += '\n</div>'
