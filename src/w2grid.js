@@ -3544,7 +3544,8 @@ class w2grid extends w2base {
             return
         }
         // call delete script
-        let url = (typeof this.url != 'object' ? this.url : this.url.remove)
+        // Changed to make the function correspond to the url property when deleting
+        let url = (typeof this.url == 'object' ? this.url.remove : this.url)
         if (url) {
             this.request('delete')
         } else {
