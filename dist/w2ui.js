@@ -1,4 +1,4 @@
-/* w2ui 2.0.x (nightly) (6/26/2023, 9:32:23 PM) (c) http://w2ui.com, vitmalina@gmail.com */
+/* w2ui 2.0.x (nightly) (6/27/2023, 8:10:35 AM) (c) http://w2ui.com, vitmalina@gmail.com */
 /**
  * Part of w2ui 2.0 library
  *  - Dependencies: w2utils
@@ -8632,6 +8632,7 @@ class w2tabs extends w2base {
             disabled: false,
             closable: false,
             tooltip: null,
+            badge: 0,
             style: '',
             onClick: null,
             onRefresh: null,
@@ -8896,6 +8897,11 @@ class w2tabs extends w2base {
                 data-mousedown="stop" data-mouseup="clickClose|${tab.id}|event">
             </div>`
         }
+        let badgeHtml = ''
+        if (tab.badge) {
+            let badgeSize = tab.badge > 9 ? 'double' : 'single'
+            badgeHtml = `<div id="tabs_${this.name}_tab_badge_${tab.id}" class="w2ui-tab-badge-${badgeSize}">${tab.badge}</div>`
+        }
         return `
             <div id="tabs_${this.name}_tab_${tab.id}" style="${addStyle} ${tab.style}"
                 class="w2ui-tab w2ui-eaction ${this.active === tab.id ? 'active' : ''} ${tab.closable ? 'closable' : ''} ${tab.class ? tab.class : ''}"
@@ -8905,8 +8911,16 @@ class w2tabs extends w2base {
                 data-mouseup="mouseAction|Up|${tab.id}|event"
                 data-click="click|${tab.id}|event"
                >
-                    ${w2utils.lang(text) + closable}
+                    ${w2utils.lang(text) + closable + badgeHtml}
             </div>`
+    }
+    setBadge(id,num) {
+        let index = this.get(id, true)
+        let tab   = this.tabs[index]
+        if (tab == null) return false
+        if (isNaN(num)) return false
+        tab.badge = num > 99 ? 99 : num
+        this.refresh(tab.id)
     }
     refresh(id) {
         let time = Date.now()

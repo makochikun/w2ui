@@ -1,4 +1,4 @@
-/* w2ui 2.0.x (nightly) (6/26/2023, 9:32:23 PM) (c) http://w2ui.com, vitmalina@gmail.com */
+/* w2ui 2.0.x (nightly) (6/27/2023, 8:10:35 AM) (c) http://w2ui.com, vitmalina@gmail.com */
 /**
 * TODO:
 *  - remove default styling, only keep w2ui-* styles
@@ -3605,6 +3605,32 @@ textarea.w2ui-error {
   color: inherit;
   text-shadow: inherit;
   content: 'x';
+}
+.w2ui-tabs .w2ui-scroll-wrapper .w2ui-tab .w2ui-tab-badge-single {
+  position: relative;
+  top: 0px;
+  left: -10px;
+  border-radius: 10px;
+  background-color: red;
+  color: white;
+  padding: 5px 5px 0px 5px;
+  font-size: 0.8em;
+  font-weight: bold;
+  width: 20px;
+  height: 18px;
+}
+.w2ui-tabs .w2ui-scroll-wrapper .w2ui-tab .w2ui-tab-badge-double {
+  position: relative;
+  top: 0px;
+  left: -10px;
+  border-radius: 10px;
+  background-color: red;
+  color: white;
+  padding: 5px 3px 0px 3px;
+  font-size: 0.8em;
+  font-weight: bold;
+  width: 20px;
+  height: 18px;
 }
 .w2ui-tabs .w2ui-scroll-wrapper .w2ui-tabs-right {
   padding: 8px 2px;
