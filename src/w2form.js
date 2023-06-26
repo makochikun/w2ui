@@ -214,7 +214,7 @@ class w2form extends w2base {
                     if (fld.html == null) fld.html = {}
                     Object.keys(fld).forEach((key => {
                         if (ignore.indexOf(key) != -1) return
-                        if (['label', 'attr', 'style', 'text', 'span', 'page', 'column', 'anchor',
+                        if (['label', 'attr', 'style', 'text', 'span', 'page', 'column', 'anchor', 'columnStyle',
                             'group', 'groupStyle', 'groupTitleStyle', 'groupCollapsible'].indexOf(key) != -1) {
                             fld.html[key] = fld[key]
                             delete fld[key]
@@ -244,6 +244,7 @@ class w2form extends w2base {
                         groupStyle: field.style || '',
                         groupTitleStyle: field.titleStyle || '',
                         groupCollapsible: field.collapsible === true ? true : false,
+                        columnStyle: field.columnStyle || '',
                     }
                     // loop through fields
                     if (Array.isArray(field.fields)) {
@@ -1376,6 +1377,18 @@ class w2form extends w2base {
             buttons += '\n</div>'
         }
         html = ''
+
+        console.log( this.fields )
+        let columnStyles = []
+        for ( let fld of this.fields ) {
+            if (fld.html?.page && fld.html?.column && fld.html?.columnStyle) {
+                if (columnStyles[fld.html.page] == null ) columnStyles[fld.html.page] = []
+                //if (columnStyles[fld.html.page][fld.html.column] == null ) columnStyles[fld.html.page][fld.html.column] = ''
+                columnStyles[fld.html.page][fld.html.column] = fld.html.columnStyle
+            }
+        }
+        console.log( columnStyles )
+
         for (let p = 0; p < pages.length; p++){
             html += '<div class="w2ui-page page-'+ p +'" style="' + (p !== 0 ? 'display: none;' : '') + this.pageStyle + '">'
             if (!pages[p]) {
@@ -1386,6 +1399,7 @@ class w2form extends w2base {
                 html += pages[p].before
             }
             html += '<div class="w2ui-column-container">'
+
             Object.keys(pages[p]).sort().forEach((c, ind) => {
                 if (c == parseInt(c)) {
                     html += '<div class="w2ui-column col-'+ c +'">' + (pages[p][c] || '') + '\n</div>'
