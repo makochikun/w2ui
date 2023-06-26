@@ -1,4 +1,4 @@
-/* w2ui 2.0.x (nightly) (6/26/2023, 11:42:55 AM) (c) http://w2ui.com, vitmalina@gmail.com */
+/* w2ui 2.0.x (nightly) (6/26/2023, 4:17:53 PM) (c) http://w2ui.com, vitmalina@gmail.com */
 /**
  * Part of w2ui 2.0 library
  *  - Dependencies: w2utils
@@ -12939,6 +12939,8 @@ class w2grid extends w2base {
         if (postData == null) postData = {}
         if (!url) url = this.url
         if (!url) return new Promise((resolve, reject) => { reject() })
+        let dataSource = null
+        if (typeof url === 'function') dataSource = url
         // build parameters list
         if (!w2utils.isInt(this.offset)) this.offset = 0
         if (!w2utils.isInt(this.last.fetch.offset)) this.last.fetch.offset = 0
@@ -13033,21 +13035,35 @@ class w2grid extends w2base {
             loaded: false
         })
         fetchOptions.signal = this.last.fetch.controller.signal
-        fetch(url, fetchOptions)
-            .catch(processError)
-            .then(resp => {
-                if (resp == null) return // request aborted
-                if (resp?.status != 200) {
-                    processError(resp ?? {})
-                    return
-                }
-                self.unlock()
-                resp.json()
-                    .catch(processError)
-                    .then(data => {
-                        this.requestComplete(data, action, callBack, resolve, reject)
-                    })
-            })
+        if (typeof dataSource === 'function') {
+            dataSource(JSON.parse(url.searchParams.get('request')))
+                .catch(processError)
+                .then(resp => {
+                    if (resp == null) return // request aborted
+                    if (resp?.status != 200 && resp?.status != 'success') {
+                        processError(resp ?? {})
+                        return
+                    }
+                    self.unlock()
+                    this.requestComplete(resp.data, action, callBack, resolve, reject)
+                })
+        } else {
+            fetch(url, fetchOptions)
+                .catch(processError)
+                .then(resp => {
+                    if (resp == null) return // request aborted
+                    if (resp?.status != 200) {
+                        processError(resp ?? {})
+                        return
+                    }
+                    self.unlock()
+                    resp.json()
+                        .catch(processError)
+                        .then(data => {
+                            this.requestComplete(data, action, callBack, resolve, reject)
+                        })
+                })
+        }
         if (action == 'load') {
             // event after
             edata.finish()
@@ -13735,7 +13751,8 @@ class w2grid extends w2base {
             return
         }
         // call delete script
-        let url = (typeof this.url != 'object' ? this.url : this.url.remove)
+        // Changed to make the function correspond to the url property when deleting
+        let url = (typeof this.url == 'object' ? this.url.remove : this.url)
         if (url) {
             this.request('delete')
         } else {
