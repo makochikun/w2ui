@@ -339,7 +339,7 @@ class w2tabs extends w2base {
             let badgeClass = tab.badge.counter > 9 ? 'double' : 'single'
             let badgeTime = tab.badge.time ? tab.badge.time : '1s'
             let blink = tab.badge.blink ? `animation: changeBlinkAnimation ${badgeTime} step-end ${tab.badge.blink};` : ''
-            let bgColor = tab.badge.bgColor ? `background-color: ${tab.badge.bgColor}` : ''
+            let bgColor = tab.badge.bgColor ? `background-color: ${tab.badge.bgColor};` : ''
             badgeHtml = `<div id="tabs_${this.name}_tab_badge_${tab.id}" class="w2ui-tab-badge-${badgeClass}" style="${bgColor} ${blink}">${tab.badge.counter}</div>`
         }
         return `
