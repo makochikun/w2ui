@@ -1,4 +1,4 @@
-/* w2ui 2.0.x (nightly) (6/27/2023, 8:10:35 AM) (c) http://w2ui.com, vitmalina@gmail.com */
+/* w2ui 2.0.x (nightly) (6/27/2023, 4:39:12 PM) (c) http://w2ui.com, vitmalina@gmail.com */
 /**
 * TODO:
 *  - remove default styling, only keep w2ui-* styles
@@ -3576,7 +3576,7 @@ textarea.w2ui-error {
 }
 .w2ui-tabs .w2ui-scroll-wrapper .w2ui-tab .w2ui-tab-close {
   position: absolute;
-  right: 3px;
+  left: 0px;
   top: 5px;
   color: #555;
   float: right;
@@ -3607,30 +3607,47 @@ textarea.w2ui-error {
   content: 'x';
 }
 .w2ui-tabs .w2ui-scroll-wrapper .w2ui-tab .w2ui-tab-badge-single {
-  position: relative;
-  top: 0px;
-  left: -10px;
+  position: absolute;
+  top: 0;
+  right: 0px;
   border-radius: 10px;
   background-color: red;
-  color: white;
-  padding: 5px 5px 0px 5px;
+  color: #fff;
+  padding: 5px 0px 0 0px;
   font-size: 0.8em;
   font-weight: bold;
-  width: 20px;
-  height: 18px;
+  text-align: center;
+  opacity: 0.8;
+  zoom: 0.9;
+  width: 18px;
+  height: 17px;
 }
 .w2ui-tabs .w2ui-scroll-wrapper .w2ui-tab .w2ui-tab-badge-double {
-  position: relative;
-  top: 0px;
-  left: -10px;
+  position: absolute;
+  top: 0;
+  right: 0px;
   border-radius: 10px;
   background-color: red;
-  color: white;
-  padding: 5px 3px 0px 3px;
+  color: #fff;
+  padding: 5px 0px 0 0px;
   font-size: 0.8em;
   font-weight: bold;
-  width: 20px;
-  height: 18px;
+  text-align: center;
+  opacity: 0.8;
+  zoom: 0.9;
+  width: 18px;
+  height: 17px;
+}
+@keyframes changeBlinkAnimation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .w2ui-tabs .w2ui-scroll-wrapper .w2ui-tabs-right {
   padding: 8px 2px;

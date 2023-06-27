@@ -51,7 +51,7 @@ class w2tabs extends w2base {
             disabled: false,
             closable: false,
             tooltip: null,
-            badge: 0,
+            badge: {counter:0, bgColor:'red', time:'1s', blink:5 },
             style: '',
             onClick: null,
             onRefresh: null,
@@ -335,9 +335,10 @@ class w2tabs extends w2base {
             </div>`
         }
         let badgeHtml = ''
-        if (tab.badge) {
-            let badgeSize = tab.badge > 9 ? 'double' : 'single'
-            badgeHtml = `<div id="tabs_${this.name}_tab_badge_${tab.id}" class="w2ui-tab-badge-${badgeSize}">${tab.badge}</div>`
+        if (tab.badge.counter) {
+            let badgeClass = tab.badge.counter > 9 ? 'double' : 'single'
+            let blink = tab.badge.blink ? `animation: changeBlinkAnimation ${tab.badge.time} step-end ${tab.badge.blink};` : ''
+            badgeHtml = `<div id="tabs_${this.name}_tab_badge_${tab.id}" class="w2ui-tab-badge-${badgeClass}" style="background-color:${tab.badge.bgColor}; ${blink}">${tab.badge.counter}</div>`
         }
         return `
             <div id="tabs_${this.name}_tab_${tab.id}" style="${addStyle} ${tab.style}"
@@ -352,12 +353,18 @@ class w2tabs extends w2base {
             </div>`
     }
 
-    setBadge(id,num) {
+    setBadge(id,option) {
         let index = this.get(id, true)
         let tab   = this.tabs[index]
         if (tab == null) return false
-        if (isNaN(num)) return false
-        tab.badge = num > 99 ? 99 : num
+        if (typeof option == 'object') {
+            w2utils.extend(tab.badge, option)
+            if (isNaN(tab.badge.counter)) return false
+            tab.badge.counter = tab.badge.counter > 99 ? 99 : tab.badge.counter
+        } else {
+            if (isNaN(option)) return false
+            tab.badge.counter = option > 99 ? 99 : option
+        }
         this.refresh(tab.id)
     }
 
