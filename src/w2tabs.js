@@ -362,10 +362,10 @@ class w2tabs extends w2base {
         if (typeof option == 'object') {
             w2utils.extend(tab.badge, option)
             if (isNaN(tab.badge.counter)) return false
-            tab.badge.counter = tab.badge.counter > 99 ? 99 : tab.badge.counter
+            tab.badge.counter = Number(tab.badge.counter) > 99 ? 99 : Number(tab.badge.counter)
         } else {
             if (isNaN(option)) return false
-            tab.badge.counter = option > 99 ? 99 : option
+            tab.badge.counter = Number(option) > 99 ? 99 : Number(option)
         }
         this.refresh(tab.id)
     }
