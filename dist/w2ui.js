@@ -1,4 +1,4 @@
-/* w2ui 2.0.x (nightly) (6/27/2023, 7:55:14 PM) (c) http://w2ui.com, vitmalina@gmail.com */
+/* w2ui 2.0.x (nightly) (6/27/2023, 8:11:34 PM) (c) http://w2ui.com, vitmalina@gmail.com */
 /**
  * Part of w2ui 2.0 library
  *  - Dependencies: w2utils
@@ -8902,7 +8902,8 @@ class w2tabs extends w2base {
             let badgeClass = tab.badge.counter > 9 ? 'double' : 'single'
             let badgeTime = tab.badge.time ? tab.badge.time : '1s'
             let blink = tab.badge.blink ? `animation: changeBlinkAnimation ${badgeTime} step-end ${tab.badge.blink};` : ''
-            badgeHtml = `<div id="tabs_${this.name}_tab_badge_${tab.id}" class="w2ui-tab-badge-${badgeClass}" style="background-color:${tab.badge.bgColor}; ${blink}">${tab.badge.counter}</div>`
+            let bgColor = tab.badge.bgColor ? `background-color: ${tab.badge.bgColor}` : ''
+            badgeHtml = `<div id="tabs_${this.name}_tab_badge_${tab.id}" class="w2ui-tab-badge-${badgeClass}" style="${bgColor} ${blink}">${tab.badge.counter}</div>`
         }
         return `
             <div id="tabs_${this.name}_tab_${tab.id}" style="${addStyle} ${tab.style}"
