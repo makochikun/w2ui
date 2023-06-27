@@ -1,5 +1,9 @@
 # Notes to myself about changes and additions
 
+First of all, I would like to express my respect and gratitude to vitmalina for creating this wonderful library.
+
+I'm Japanese and not good at English, and to be honest, I don't really understand how to use GitHub. Please let me know if I caused any trouble to the creator, vitmalina, or others. To immediately delete.
+
 ## Changes made to w2grid
 
 ### (1) Changed so that functions can be set in the url option.
@@ -8,22 +12,34 @@ I wanted to get data from the server via socket.io in the main process of Electr
 
 The POST data originally sent to the server by Fetch is passed as an object to the function set in the url.
 
+I'm not good at explaining it in words, so I'll try to write a rough source sample.
+
+
+
 ```js
 let grid = w2grid({
    url: dataSource,
    postData: [
      cmd: 'test'
+   ],
+   sortData: [
+     { field: 'firstName', direction: 'asc' },
+     { field: 'lastName', direction: 'asc' }
+   ],
+   columns: [
+     { field: 'firstName', type: text, sortable: true },
+     { field: 'lastName', type: text }
    ]
 })
 
 function dataSource(request) {
    console.log(request)
    return new Promise(async (res,rej) => {
-     server( request ).then((res)=>{
-       console.log(res)
-       res({status:'success', data: res})
-     }).catch((res)=>{
-       rej({status:'error', statusText: res})
+     server( request ).then((result)=>{
+       console.log(result)
+       res({status: 'success', data: result})
+     }).catch((result)=>{
+       rej({status:'error', statusText: result})
      })
    })
 }
@@ -31,6 +47,10 @@ function dataSource(request) {
 ---
 {
    cmd: 'test',
+   sort: {
+     {field: 'firstName', direction: 'asc'},
+     {field: 'lastName', direction: 'asc'}
+   },
    limit: 100,
    offset: 0
 }

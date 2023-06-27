@@ -1,5 +1,9 @@
 # 変更点と追加機能についての自分用メモ
 
+はじめに、この素晴らしいライブラリーを作成されたvitmalina様に尊敬と感謝の意を表したいと思います。
+
+私は日本人で英語が得意ではなく、GitHubの使い方も正直言っていまいちよくわかっていません。もし作成者のvitmalina様や他の方にご迷惑をおかけする様な事になっていたら教えてください。すぐに削除します。
+
 ## w2gridに加えた変更点
 
 ### （１）urlオプションに関数を設定出来るように変更
@@ -8,22 +12,34 @@ Electronのメインプロセスでsocket.ioを経由してサーバーからデ
 
 urlに設定する関数には本来Fetchでサーバーに送られるPOSTデータがオブジェクト型で渡される。
 
+言葉で説明するのが得意ではないのでラフなソースサンプル書いてみます。
+
+
+
 ``` js
 let grid = w2grid({
   url: dataSource,
   postData: [
     cmd: 'test'
+  ],
+  sortData: [
+    { field: 'firstName', direction: 'asc' },
+    { field: 'lastName', direction: 'asc' }
+  ],
+  columns: [
+    { field: 'firstName', type:text, sortable: true },
+    { field: 'lastName', type:text }
   ]
 })
 
 function dataSource(request) {
   console.log(request)
   return new Promise(async (res,rej) => {
-    server( request ).then((res)=>{
-      console.log(res)
-      res({status:'success', data: res})
-    }).catch((res)=>{
-      rej({status:'error', statusText: res})
+    server( request ).then((result)=>{
+      console.log(result)
+      res({status:'success', data: result})
+    }).catch((result)=>{
+      rej({status:'error', statusText: result})
     })
   })
 }
@@ -31,6 +47,10 @@ function dataSource(request) {
 ---
 {
   cmd: 'test',
+  sort: {
+    {field: 'firstName', direction: 'asc'},
+    {field: 'lastName', direction: 'asc'}
+  },
   limit: 100,
   offset: 0
 }
