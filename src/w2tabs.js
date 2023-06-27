@@ -337,7 +337,8 @@ class w2tabs extends w2base {
         let badgeHtml = ''
         if (tab.badge.counter) {
             let badgeClass = tab.badge.counter > 9 ? 'double' : 'single'
-            let blink = tab.badge.blink ? `animation: changeBlinkAnimation ${tab.badge.time} step-end ${tab.badge.blink};` : ''
+            let badgeTime = tab.badge.time ? tab.badge.time : '1s'
+            let blink = tab.badge.blink ? `animation: changeBlinkAnimation ${badgeTime} step-end ${tab.badge.blink};` : ''
             badgeHtml = `<div id="tabs_${this.name}_tab_badge_${tab.id}" class="w2ui-tab-badge-${badgeClass}" style="background-color:${tab.badge.bgColor}; ${blink}">${tab.badge.counter}</div>`
         }
         return `
