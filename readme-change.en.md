@@ -143,4 +143,4 @@ Badges can only be set numerically and have a maximum display limit of 99. Even 
 
 Setting it to 0 will make the badge disappear.
 
-For blink, you can specify the number of times with a numerical value or set 'inhart' etc.
+For blink, you can specify the number of times with a numerical value or set 'infinite' etc.
