@@ -1,4 +1,4 @@
-/* w2ui 2.0.x (nightly) (6/28/2023, 5:54:58 PM) (c) http://w2ui.com, vitmalina@gmail.com */
+/* w2ui 2.0.x (nightly) (6/28/2023, 10:42:22 PM) (c) http://w2ui.com, vitmalina@gmail.com */
 /**
  * Part of w2ui 2.0 library
  *  - Dependencies: w2utils
@@ -19190,8 +19190,6 @@ class w2form extends w2base {
     formReadOnly(flg) {
         let self = this
         let flds = []        
-        //let resolve
-        //let prom = new Promise((res, rej) => { resolve = res })
         // event before
         let edata = self.trigger('changeEditableStatus', {editableStatus: flg})
         if (edata.isCancelled === true) return
@@ -19199,8 +19197,10 @@ class w2form extends w2base {
         flg ? this.disable(...flds) : this.enable(...flds)
         this.readOnly = flg
         edata.finish()
-        //resolve(flg)
-        //return 
+    }
+    reset() {
+        this.record = Object.assign({}, this.original)
+        this.refresh()
     }
     updateEmptyGroups() {
         // hide empty groups
@@ -20509,6 +20509,8 @@ class w2form extends w2base {
             }
             setFocus()
         }
+        //readOnly
+        this.formReadOnly(this.readOnly)
         return Date.now() - time
     }
     setFocus(focus) {

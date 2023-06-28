@@ -594,8 +594,6 @@ class w2form extends w2base {
     formReadOnly(flg) {
         let self = this
         let flds = []        
-        //let resolve
-        //let prom = new Promise((res, rej) => { resolve = res })
         // event before
         let edata = self.trigger('changeEditableStatus', {editableStatus: flg})
         if (edata.isCancelled === true) return
@@ -603,8 +601,11 @@ class w2form extends w2base {
         flg ? this.disable(...flds) : this.enable(...flds)
         this.readOnly = flg
         edata.finish()
-        //resolve(flg)
-        //return 
+    }
+
+    reset() {
+        this.record = Object.assign({}, this.original)
+        this.refresh()
     }
 
     updateEmptyGroups() {
@@ -1950,6 +1951,8 @@ class w2form extends w2base {
             }
             setFocus()
         }
+        //readOnly
+        this.formReadOnly(this.readOnly)
         return Date.now() - time
     }
 
