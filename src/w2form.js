@@ -65,6 +65,7 @@ class w2form extends w2base {
         this.nestedFields = true // use field name containing dots as separator to look into object
         this.tabindexBase = 0 // this will be added to the auto numbering
         this.isGenerated  = false
+        this.readOnly     = false
         this.last         = {
             fetchCtrl: null,    // last fetch AbortController
             fetchOptions: null, // last fetch options
@@ -85,6 +86,7 @@ class w2form extends w2base {
         this.onAction     = null
         this.onToolbar    = null
         this.onError      = null
+        this.onChangeEditableState = null
         this.msgRefresh   = 'Loading...'
         this.msgSaving    = 'Saving...'
         this.msgServerError = 'Server error'
@@ -590,9 +592,19 @@ class w2form extends w2base {
     }
 
     formReadOnly(flg) {
-        let flds = []
+        let self = this
+        let flds = []        
+        //let resolve
+        //let prom = new Promise((res, rej) => { resolve = res })
+        // event before
+        let edata = self.trigger('changeEditableStatus', {editableStatus: flg})
+        if (edata.isCancelled === true) return
         for (let fld of this.fields) flds.push(fld.field)
         flg ? this.disable(...flds) : this.enable(...flds)
+        this.readOnly = flg
+        edata.finish()
+        //resolve(flg)
+        //return 
     }
 
     updateEmptyGroups() {
