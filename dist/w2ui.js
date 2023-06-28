@@ -1,4 +1,4 @@
-/* w2ui 2.0.x (nightly) (6/28/2023, 10:09:35 AM) (c) http://w2ui.com, vitmalina@gmail.com */
+/* w2ui 2.0.x (nightly) (6/28/2023, 10:56:42 AM) (c) http://w2ui.com, vitmalina@gmail.com */
 /**
  * Part of w2ui 2.0 library
  *  - Dependencies: w2utils
@@ -19184,6 +19184,11 @@ class w2form extends w2base {
         }
         if (effected.length > 0) this.refresh.apply(this, effected)
         return effected
+    }
+    formReadOnly(flg) {
+        let flds = []
+        for (let fld of this.fields) flds.push(fld.field)
+        flg ? this.disable(...flds) : this.enable(...flds)
     }
     updateEmptyGroups() {
         // hide empty groups

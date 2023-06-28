@@ -589,6 +589,12 @@ class w2form extends w2base {
         return effected
     }
 
+    formReadOnly(flg) {
+        let flds = []
+        for (let fld of this.fields) flds.push(fld.field)
+        flg ? this.disable(...flds) : this.enable(...flds)
+    }
+
     updateEmptyGroups() {
         // hide empty groups
         query(this.box).find('.w2ui-group').each((group) =>{
