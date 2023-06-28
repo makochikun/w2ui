@@ -102,6 +102,36 @@ function dataSource(request) {
   }
 ```
 
+### （２）フォームの閲覧モードを追加した
+
+各々のフィールドを個別にリードオンリーにするメソッドがあるのでそれを使えば良いのだが、面倒なので追加した。
+
+``` js
+const form = new w2form({
+  name: 'mainForm',
+  header: 'Header',
+  readOnly: true,   //  true or false
+  fields: { 
+  }
+
+----
+
+form.formReadOnly(false) // true = change to read only mode 
+                         // false = change to editable mode
+
+```
+
+### （３）リセットメソッドを追加した
+
+ふと使いたくなる事が多いので追加した
+単純にform.originalをform.recordにObject.assignを使ってコピーしたあとにrefresh()してるだけのメソッド
+
+
+``` js
+form.reset()
+```
+
+
 ---
 
 ## w2tabsに加えた変更点

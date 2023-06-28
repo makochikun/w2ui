@@ -101,7 +101,34 @@ Please refer to the example above.
      }
    }
 ```
+### (2) Added view mode of form
 
+There is a method to make each field read-only individually, so it would be nice to use it, but it's troublesome, so I added it.
+
+```js
+const form = new w2form({
+   name: 'mainForm',
+   header: 'Header',
+   readOnly: true, // true or false
+   fields: {
+   }
+
+----
+
+form.formReadOnly(false) // true = change to read only mode
+                          // false = change to editable mode
+
+```
+
+### (3) Added reset method
+
+I added it because I often want to use it
+A method that simply refresh() after copying form.original to form.record using Object.assign
+
+
+```js
+form.reset()
+```
 ---
 
 ## Changes made to w2tabs
