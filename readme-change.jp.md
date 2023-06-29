@@ -131,6 +131,8 @@ form.formReadOnly(false) // true = change to read only mode
 form.reset()
 ```
 
+### （４）Clear時にヘッダーがクリアされないバグを修正
+
 
 ---
 

@@ -129,6 +129,9 @@ A method that simply refresh() after copying form.original to form.record using 
 ```js
 form.reset()
 ```
+
+### (4) Fixed a bug that the header was not cleared when clear()
+
 ---
 
 ## Changes made to w2tabs
