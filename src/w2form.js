@@ -216,7 +216,7 @@ class w2form extends w2base {
                     if (fld.html == null) fld.html = {}
                     Object.keys(fld).forEach((key => {
                         if (ignore.indexOf(key) != -1) return
-                        if (['label', 'attr', 'style', 'text', 'span', 'page', 'column', 'anchor', 'columnStyle',
+                        if (['label', 'attr', 'style', 'text', 'span', 'page', 'column', 'anchor', 'columnStyle', 
                             'group', 'groupStyle', 'groupTitleStyle', 'groupCollapsible'].indexOf(key) != -1) {
                             fld.html[key] = fld[key]
                             delete fld[key]
@@ -229,7 +229,7 @@ class w2form extends w2base {
                     let ignore = ['style', 'html']
                     Object.keys(fld).forEach((key => {
                         if (ignore.indexOf(key) != -1) return
-                        if (['span', 'column', 'attr', 'text', 'label'].indexOf(key) != -1) {
+                        if (['span', 'column', 'attr', 'text', 'label', 'columnContStyle'].indexOf(key) != -1) {
                             if (fld[key] && !fld2.html[key]) {
                                 fld2.html[key] = fld[key]
                             }
@@ -247,6 +247,7 @@ class w2form extends w2base {
                         groupTitleStyle: field.titleStyle || '',
                         groupCollapsible: field.collapsible === true ? true : false,
                         columnStyle: field.columnStyle || '',
+                        columnContStyle: field.columnContStyle || ''
                     }
                     // loop through fields
                     if (Array.isArray(field.fields)) {
@@ -1331,7 +1332,7 @@ class w2form extends w2base {
                 if (field.html.groupCollapsible) {
                     collapsible = '<span class="w2ui-icon-collapse" style="width: 15px; display: inline-block; position: relative; top: -2px;"></span>'
                 }
-                html += '\n <div class="w2ui-group">'
+                html += `\n <div class="w2ui-group" style="${['after','before'].indexOf(field.html.column) != -1 ? (field.html?.columnStyle || '') : ''}">`
                     + '\n   <div class="w2ui-group-title w2ui-eaction" style="'+ (field.html.groupTitleStyle || '') + '; '
                                     + (collapsible != '' ? 'cursor: pointer; user-select: none' : '') + '"'
                     + (collapsible != '' ? 'data-group="' + w2utils.base64encode(field.html.group) + '"' : '')
@@ -1398,11 +1399,17 @@ class w2form extends w2base {
         html = ''
 
         let columnStyles = []
+        let columnContStyles = []
 
         for (let fld of this.fields) {
-            if ('page' in fld.html && 'column' in fld.html && 'columnStyle' in fld.html) {
-                if (!(fld.html.page in columnStyles)) columnStyles[fld.html.page] = []
-                columnStyles[fld.html.page][fld.html.column] = fld.html.columnStyle
+            if ('page' in fld.html && 'column' in fld.html && ('columnStyle' in fld.html || 'columnContStyle' in fld.html)) {
+                if ('columnStyle' in fld.html) {
+                    if (!(fld.html.page in columnStyles)) columnStyles[fld.html.page] = []
+                    columnStyles[fld.html.page][fld.html.column] = fld.html.columnStyle
+                }
+                if ('columnContStyle' in fld.html) {
+                    if (fld.html.columnContStyle.length) columnContStyles[fld.html.page] = fld.html.columnContStyle
+                }
             }
         }
 
@@ -1415,7 +1422,7 @@ class w2form extends w2base {
             if (pages[p].before) {
                 html += pages[p].before
             }
-            html += '<div class="w2ui-column-container">'
+            html += `<div class="w2ui-column-container" style="${(columnContStyles[p] || '')}">`
 
             Object.keys(pages[p]).sort().forEach((c, ind) => {
                 if (c == parseInt(c)) {
