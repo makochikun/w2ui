@@ -656,6 +656,7 @@ class w2form extends w2base {
                 this.refresh(field)
             })
         } else {
+            this.header = null
             this.recid = null
             this.record = {}
             this.original = null

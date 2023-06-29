@@ -1,4 +1,4 @@
-/* w2ui 2.0.x (nightly) (6/29/2023, 2:33:46 PM) (c) http://w2ui.com, vitmalina@gmail.com */
+/* w2ui 2.0.x (nightly) (6/30/2023, 12:48:52 AM) (c) http://w2ui.com, vitmalina@gmail.com */
 /**
  * Part of w2ui 2.0 library
  *  - Dependencies: w2utils
@@ -19247,6 +19247,7 @@ class w2form extends w2base {
                 this.refresh(field)
             })
         } else {
+            this.header = null
             this.recid = null
             this.record = {}
             this.original = null
