@@ -661,7 +661,6 @@ class w2form extends w2base {
             this.record = {}
             this.original = null
             for (let tab of this.tabs.tabs ) tab.badge = Object.assign({},this.tabs.tab_template.badge)
-            console.log('form clear', this)
             this.refresh()
             this.hideErrors()
         }
