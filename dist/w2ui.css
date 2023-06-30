@@ -1,4 +1,4 @@
-/* w2ui 2.0.x (nightly) (6/30/2023, 12:48:52 AM) (c) http://w2ui.com, vitmalina@gmail.com */
+/* w2ui 2.0.x (nightly) (6/30/2023, 1:28:56 PM) (c) http://w2ui.com, vitmalina@gmail.com */
 /**
 * TODO:
 *  - remove default styling, only keep w2ui-* styles
@@ -2225,6 +2225,7 @@ textarea.w2ui-error {
   white-space: nowrap;
 }
 .w2ui-grid .w2ui-grid-toolbar .w2ui-grid-searches > span {
+  min-width: 48px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
