@@ -1,4 +1,4 @@
-/* w2ui 2.0.x (nightly) (6/30/2023, 1:28:56 PM) (c) http://w2ui.com, vitmalina@gmail.com */
+/* w2ui 2.0.x (nightly) (6/30/2023, 8:40:48 PM) (c) http://w2ui.com, vitmalina@gmail.com */
 /**
  * Part of w2ui 2.0 library
  *  - Dependencies: w2utils
@@ -19300,7 +19300,6 @@ class w2form extends w2base {
             this.record = {}
             this.original = null
             for (let tab of this.tabs.tabs ) tab.badge = Object.assign({},this.tabs.tab_template.badge)
-            console.log('form clear', this)
             this.refresh()
             this.hideErrors()
         }
@@ -20236,7 +20235,7 @@ class w2form extends w2base {
                         this._previous = value.previous
                     }
                     // event before
-                    let edata2 = self.trigger('input', { target: self.name, value, originalEvent: event })
+                    let edata2 = self.trigger('input', { target: this.name, value, originalEvent: event })
                     if (edata2.isCancelled === true) return
                     // default action
                     self.setValue(this.name, value.current)

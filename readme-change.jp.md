@@ -14,8 +14,6 @@ urlに設定する関数には本来Fetchでサーバーに送られるPOSTデ�
 
 言葉で説明するのが得意ではないのでラフなソースサンプル書いてみます。
 
-
-
 ``` js
 let grid = w2grid({
   url: dataSource,
@@ -126,13 +124,11 @@ form.formReadOnly(false) // true = change to read only mode
 ふと使いたくなる事が多いので追加した
 単純にform.originalをform.recordにObject.assignを使ってコピーしたあとにrefresh()してるだけのメソッド
 
-
 ``` js
 form.reset()
 ```
 
 ### （４）Clear時にヘッダーがクリアされないバグを修正
-
 
 ---
 
@@ -178,4 +174,3 @@ tabs.setBadge('tab3', 1)
 blinkは回数を数値で指定するか'infinite'等も設定出来ます。
 
 バッジ機能追加に伴いCloseボタンの位置をタブの右側から左側に変更しました。
-
