@@ -357,10 +357,10 @@ class w2tabs extends w2base {
 
     setBadge(id,option) {
         let index = this.get(id, true)
-        let tab   = this.tabs[index]
+        let tab = this.tabs[index]
         if (tab == null) return false
         if (typeof option == 'object') {
-            w2utils.extend(tab.badge, option)
+            tab.badge = Object.assign({},option)
             if (isNaN(tab.badge.counter)) return false
             tab.badge.counter = Number(tab.badge.counter) > 99 ? 99 : Number(tab.badge.counter)
         } else {
