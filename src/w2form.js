@@ -192,7 +192,7 @@ class w2form extends w2base {
                         fields.push(fld)
                     } else if (fld.type == 'tab') {
                         // add tab
-                        let tab = { id: key, text: key }
+                        let tab = { id: key, text: fld?.tabText ?? key }
                         if (fld.style) {
                             tab.style = fld.style
                         }
@@ -229,7 +229,7 @@ class w2form extends w2base {
                     let ignore = ['style', 'html']
                     Object.keys(fld).forEach((key => {
                         if (ignore.indexOf(key) != -1) return
-                        if (['span', 'column', 'attr', 'text', 'label', 'columnContStyle'].indexOf(key) != -1) {
+                        if (['span', 'column', 'attr', 'text', 'label', 'tabText', 'columnContStyle'].indexOf(key) != -1) {
                             if (fld[key] && !fld2.html[key]) {
                                 fld2.html[key] = fld[key]
                             }
