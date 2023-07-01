@@ -1,4 +1,4 @@
-/* w2ui 2.0.x (nightly) (6/30/2023, 8:40:48 PM) (c) http://w2ui.com, vitmalina@gmail.com */
+/* w2ui 2.0.x (nightly) (7/1/2023, 1:01:16 PM) (c) http://w2ui.com, vitmalina@gmail.com */
 /**
  * Part of w2ui 2.0 library
  *  - Dependencies: w2utils
@@ -18850,7 +18850,7 @@ class w2form extends w2base {
                         fields.push(fld)
                     } else if (fld.type == 'tab') {
                         // add tab
-                        let tab = { id: key, text: key }
+                        let tab = { id: key, text: fld?.tabText ?? key }
                         if (fld.style) {
                             tab.style = fld.style
                         }
@@ -18885,7 +18885,7 @@ class w2form extends w2base {
                     let ignore = ['style', 'html']
                     Object.keys(fld).forEach((key => {
                         if (ignore.indexOf(key) != -1) return
-                        if (['span', 'column', 'attr', 'text', 'label', 'columnContStyle'].indexOf(key) != -1) {
+                        if (['span', 'column', 'attr', 'text', 'label', 'tabText', 'columnContStyle'].indexOf(key) != -1) {
                             if (fld[key] && !fld2.html[key]) {
                                 fld2.html[key] = fld[key]
                             }
