@@ -132,6 +132,19 @@ form.reset()
 
 ### (4) Fixed a bug that the header was not cleared when clear()
 
+### (5) Addition of placeholder notation for date fields
+
+I didn't like the dateFormat string set in the locale file being displayed as it is, so when I checked the original source, it seemed like it would be nice to set a placeholder when setting each field with attr, but I set it for all fields. I added a new item **dateFormatForPlaceholder** to the locale file because it's cumbersome to write.
+
+``` json
+{
+     "locale": "ja-JP",
+     "dateFormat": "yyyy-mm-dd",
+     "dateFormatForPlaceholder": "year-month-day",
+     "timeFormat": "hh24:mm",
+     "datetimeFormat": "yyyy-mm-dd|hh24:mm",
+```
+
 ---
 
 ## Changes made to w2tabs

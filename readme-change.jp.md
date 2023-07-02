@@ -130,6 +130,19 @@ form.reset()
 
 ### （４）Clear時にヘッダーがクリアされないバグを修正
 
+### （５）日付フィールドのプレイスホルダー表記法の追加
+
+ロケールファイルに設定しているdateFormatの文字列がそのまま表示されるのが嫌で、オリジナルソースを確認したところ、attrで各フィールド設定時にplaceholder設定すれば良い感じだったが、全てのフィールドに設定を書くのは面倒なのでロケールファイルに**dateFormatForPlaceholder**という新しい項目を追加した。
+
+``` json
+{
+    "locale": "ja-JP",
+    "dateFormat": "yyyy-mm-dd",
+    "dateFormatForPlaceholder": "年-月-日",
+    "timeFormat": "hh24:mm",
+    "datetimeFormat": "yyyy-mm-dd|hh24:mm",
+```
+
 ---
 
 ## w2tabsに加えた変更点
