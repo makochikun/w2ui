@@ -1,4 +1,4 @@
-/* w2ui 2.0.x (nightly) (7/1/2023, 1:01:16 PM) (c) http://w2ui.com, vitmalina@gmail.com */
+/* w2ui 2.0.x (nightly) (7/2/2023, 11:19:20 PM) (c) http://w2ui.com, vitmalina@gmail.com */
 /**
  * Part of w2ui 2.0 library
  *  - Dependencies: w2utils
@@ -20762,6 +20762,7 @@ class w2field extends w2base {
             case 'date': {
                 defaults = {
                     format        : w2utils.settings.dateFormat, // date format
+                    placeholder   : w2utils.settings?.dateFormatForPlaceholder ?? null,
                     keyboard      : true,
                     autoCorrect   : true,
                     start         : null,
@@ -20774,7 +20775,7 @@ class w2field extends w2base {
                 this.options = w2utils.extend({ type: 'date' }, defaults, options)
                 options = this.options // since object is re-created, need to re-assign
                 if (query(this.el).attr('placeholder') == null) {
-                    query(this.el).attr('placeholder', options.format)
+                    query(this.el).attr('placeholder', options.placeholder ?? options.format)
                 }
                 break
             }
@@ -21637,6 +21638,7 @@ class w2field extends w2base {
             if (!options.keyboard || query(this.el).prop('readOnly') || query(this.el).prop('disabled')) return
             let is = (this.type == 'date' ? w2utils.isDate : w2utils.isDateTime).bind(w2utils)
             let format = (this.type == 'date' ? w2utils.formatDate : w2utils.formatDateTime).bind(w2utils)
+console.log( w2utils );
             daymil = 24*60*60*1000
             inc = 1
             if (event.ctrlKey || event.metaKey) inc = 10 // by month
