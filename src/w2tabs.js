@@ -360,11 +360,13 @@ class w2tabs extends w2base {
         let tab = this.tabs[index]
         if (tab == null) return false
         if (typeof option == 'object') {
+            if (isNaN(option?.badge?.counter)) return false
+            if (tab.badge.counter == option.badge.counter) return true 
             tab.badge = Object.assign({},option)
-            if (isNaN(tab.badge.counter)) return false
             tab.badge.counter = Number(tab.badge.counter) > 99 ? 99 : Number(tab.badge.counter)
         } else {
             if (isNaN(option)) return false
+            if (tab.badge.counter == option) return true 
             tab.badge.counter = Number(option) > 99 ? 99 : Number(option)
         }
         this.refresh(tab.id)
