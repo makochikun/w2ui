@@ -1,4 +1,4 @@
-/* w2ui 2.0.x (nightly) (7/2/2023, 11:19:20 PM) (c) http://w2ui.com, vitmalina@gmail.com */
+/* w2ui 2.0.x (nightly) (7/10/2023, 2:53:50 PM) (c) http://w2ui.com, vitmalina@gmail.com */
 /**
  * Part of w2ui 2.0 library
  *  - Dependencies: w2utils
@@ -8943,11 +8943,13 @@ class w2tabs extends w2base {
         let tab = this.tabs[index]
         if (tab == null) return false
         if (typeof option == 'object') {
+            if (isNaN(option?.badge?.counter)) return false
+            if (tab.badge.counter == option.badge.counter) return true 
             tab.badge = Object.assign({},option)
-            if (isNaN(tab.badge.counter)) return false
             tab.badge.counter = Number(tab.badge.counter) > 99 ? 99 : Number(tab.badge.counter)
         } else {
             if (isNaN(option)) return false
+            if (tab.badge.counter == option) return true 
             tab.badge.counter = Number(option) > 99 ? 99 : Number(option)
         }
         this.refresh(tab.id)
