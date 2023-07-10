@@ -366,7 +366,6 @@ class w2tabs extends w2base {
             tab.badge.counter = Number(tab.badge.counter) > 99 ? 99 : Number(tab.badge.counter)
         } else {
             if (isNaN(option)) return false
-            console.log( tab.badge.counter, option, tab )
             if (tab.badge.counter == Number(option)) return true 
             tab.badge.counter = Number(option) > 99 ? 99 : Number(option)
         }
