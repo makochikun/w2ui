@@ -1,4 +1,4 @@
-/* w2ui 2.0.x (nightly) (7/10/2023, 3:34:18 PM) (c) http://w2ui.com, vitmalina@gmail.com */
+/* w2ui 2.0.x (nightly) (7/10/2023, 3:37:11 PM) (c) http://w2ui.com, vitmalina@gmail.com */
 /**
  * Part of w2ui 2.0 library
  *  - Dependencies: w2utils
@@ -8686,7 +8686,6 @@ class w2tabs extends w2base {
             }
             if (!w2utils.checkUniqueId(tab.id, this.tabs, 'tabs', this.name)) return
             // add tab
-            //let it = Object.assign({}, this.tab_template, tab)
             let it = w2utils.extend({}, this.tab_template, tab)
             if (id == null) {
                 this.tabs.push(it)
@@ -8950,7 +8949,6 @@ class w2tabs extends w2base {
             tab.badge.counter = Number(tab.badge.counter) > 99 ? 99 : Number(tab.badge.counter)
         } else {
             if (isNaN(option)) return false
-            console.log( tab.badge.counter, option, tab )
             if (tab.badge.counter == Number(option)) return true 
             tab.badge.counter = Number(option) > 99 ? 99 : Number(option)
         }
